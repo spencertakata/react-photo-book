@@ -1,0 +1,55 @@
+/* div {
+  font-size: 0;
+  line-height: 0;
+} */
+
+* {
+  margin: 0;
+}
+
+.App {
+  padding: 3rem 1rem 1rem; 
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.2;
+  margin: 0.5rem;
+}
+
+.form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.input-item {
+  margin: 10px 0 25px
+}
+
+.label {
+  margin: 0 10px 0 0;
+  text-align: left;
+}
+
+.photo-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photo-card {
+  margin: 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-bottom {
+  padding: 1rem
+}
+
+.img {
+  width: 300px;
+  max-width: 400px;
+  height: auto;
+}
