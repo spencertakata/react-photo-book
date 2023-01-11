@@ -103,7 +103,7 @@ function App() {
             <input 
               type="text"
               className="input-text"
-              placeholder="Upload image"
+              placeholder="Image url"
               onChange={handleChange}
               value={photos.src}
               name="src"
