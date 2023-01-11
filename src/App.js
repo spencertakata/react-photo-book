@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from "uuid";
 import './App.css';
-import PhotoCard from './PhotoCard';
+import PhotoList from './PhotoList';
 import Beetle from './photos/beetle.jpg';
 import Timmy from './photos/timmy.jpg';
 
@@ -10,16 +10,12 @@ function App() {
   const photoData = [
     {
       "src": Beetle,
-      "fstop": "5.6",
-      "shutter": "1/200",
-      "iso": "1000",
+      "description": "Beetle ready for a close up",
       "id": uuidv4()
     },
     {
       "src": Timmy,
-      "fstop": "5.6",
-      "shutter": "1/250",
-      "iso": "125",
+      "description": "This is Timmy",
       "id": uuidv4()
     }
   ]
@@ -30,9 +26,9 @@ function App() {
 
   const [photos, setPhotos] = useState(() => {
     //Check for saved photo data in local storage
-    const saved = localStorage.getItem("photos");
+    const saved = sessionStorage.getItem("photos");
     const initial = JSON.parse(saved);
-    //If saved data exists, use data from local storage, else used app state default data
+    //If saved data exists, use data from session storage, else used app state default data
     if (saved != null) {
       return initial
     } else {
@@ -43,11 +39,12 @@ function App() {
   // Update local storage with current photo data state
   const updateStorage = () => {
     const temp = JSON.stringify(photos);
-    localStorage.setItem("photos", temp);
+    sessionStorage.setItem("photos", temp);
   }
 
   //add photoData to local storage on render
   useEffect(() => {
+  // eslint-disable-line react-hooks/exhaustive-deps
     updateStorage()
   }, [photos])
 
@@ -61,7 +58,7 @@ function App() {
 
   //Clear form fields after submit
   const clearForm = () => {
-    Array.from(document.querySelectorAll("input")).forEach(
+    Array.from(document.querySelectorAll(".input-text")).forEach(
       input => (input.value = "")
     );
   }
@@ -73,9 +70,7 @@ function App() {
 
     const newPhoto = {
       "src": e.target.src.value,
-      "fstop": e.target.fstop.value,
-      "shutter": e.target.shutter.value,
-      "iso": e.target.iso.value,
+      "description": e.target.description.value,
       "id": uuidv4()
     }
     //update the state var, not state itself (...photoData)
@@ -86,14 +81,25 @@ function App() {
     clearForm();
   };
 
+  const delPhoto = id => {
+    console.log("delete clicked");
+    console.log(photos[0].id);
+    // setPhotos([
+    //   ...photos.filter(photo => {
+    //     return photo.id !== id
+    //   }),
+    // ])
+    setPhotos(photos.filter(photo => photo.id !== id));
+  }
+
 
   return (
     <div className="App">
       <div className="header">
-        <h2>Photo Book</h2>
-        <form onSubmit={handleSubmit} className="form">
+        <h2>React Photo Book</h2>
+        <form onSubmit={handleSubmit} className="form photo-form">
           <div className="input-item">
-            <label>SRC<br/>
+            <label><span className="label">SRC</span><br/>
             <input 
               type="text"
               className="input-text"
@@ -106,59 +112,26 @@ function App() {
           </div>
 
           <div className="input-item">
-            <label><span className="label">ISO</span><br/>
-              <input 
-                type="text"
-                className="input-text"
-                placeholder="Add img iso here"
-                onChange={handleChange}
-                value={photos.iso}
-                name="iso"
-              />
-            </label>
-          </div>
-          
-          <div className="input-item">
-            <label><span className="label">f-stop</span><br/>
-              <input 
-                type="text"
-                className="input-text"
-                placeholder="Add img fstop here"
-                onChange={handleChange}
-                value={photos.fstop}
-                name="fstop"
-              />
+            <label><span className="label">Description</span><br/>
+            <textarea 
+              type="text"
+              className="input-text"
+              placeholder="Add a caption"
+              onChange={handleChange}
+              value={photos.description}
+              name="description"
+            />
             </label>
           </div>
 
-          <div className="input-item">
-            <label><span className="label">Shutter</span><br/>
-              <input 
-                type="text"
-                className="input-text"
-                placeholder="Add img shutter here"
-                onChange={handleChange}
-                value={photos.shutter}
-                name="shutter"
-              />
-            </label>
-          </div>
-          <input type="submit" value="Submit"/>
+          <input type="submit" value="Submit" className="submit button" />
         </form>
       </div>
 
-      
-      <div className="photo-container">
-        {photos.map(photo => (
-          <PhotoCard 
-            src={photo.src}
-            fstop={photo.fstop}
-            shutter={photo.shutter}
-            iso={photo.iso}
-            id={photo.id}
-          />
-        ))}
-      </div>
+      <PhotoList
+        deletePhoto={delPhoto}
+        photos={photos}
+      />
     </div>
   );
 }

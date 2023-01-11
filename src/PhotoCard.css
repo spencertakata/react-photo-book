@@ -1,40 +1,11 @@
-/* div {
-  font-size: 0;
-  line-height: 0;
-} */
-
-* {
-  margin: 0;
-}
-
-.App {
-  padding: 3rem 1rem 1rem; 
-}
-
 p {
   font-size: 1rem;
   line-height: 1.2;
   margin: 0.5rem;
 }
 
-.form {
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.input-item {
-  margin: 10px 0 25px
-}
-
 .label {
-  margin: 0 10px 0 0;
   text-align: left;
-}
-
-.photo-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .photo-card {
@@ -42,6 +13,7 @@ p {
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .card-bottom {
@@ -49,7 +21,16 @@ p {
 }
 
 .img {
-  width: 300px;
+  width: 100%;
   max-width: 400px;
   height: auto;
+}
+
+.del-btn {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  background-color: transparent;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 0.5rem;
 }
