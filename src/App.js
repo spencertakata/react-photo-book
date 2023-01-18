@@ -2,20 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from "uuid";
 import './App.css';
 import PhotoList from './PhotoList';
-import Beetle from './photos/beetle.jpg';
 import Timmy from './photos/timmy.jpg';
+import Geo from './photos/geo.jpg';
+import Sagrada from './photos/sagrada.jpg';
+import Waterfall from './photos/waterfall.jpg';
 
 function App() {
   // Initial state data
   const photoData = [
     {
-      "src": Beetle,
-      "description": "Beetle ready for a close up",
+      "src": Sagrada,
+      "description": "This photo was taken of a mirror facing up to the ceiling inside La Sagrada Familia, Barcelona, Spain.",
       "id": uuidv4()
     },
     {
       "src": Timmy,
-      "description": "This is Timmy",
+      "description": "This is Timmy, a stray cat who chose to make a home at my old house. It took a while to gain his trust, but we eventually became good friends.",
+      "id": uuidv4()
+    },
+    {
+      "src": Waterfall,
+      "description": "Long exposure of a waterfall in Costa Rica, my first time ever travelling alone to another country.",
       "id": uuidv4()
     }
   ]
@@ -96,7 +103,11 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <h2>React Photo Book</h2>
+        <div className="intro-copy">
+          <h2>React Photo Book</h2>
+          <p>Hello and welcome to my photo book. <br /><br />This is a React app I created to practice building components, updating state, and writing interactive functions. Go ahead and try adding or deleting photos from the book.</p>
+        </div>
+
         <form onSubmit={handleSubmit} className="form photo-form">
           <div className="input-item">
             <label><span className="label">SRC</span><br/>

@@ -13,8 +13,13 @@ body {
 }
 
 .header {
-  padding: 3rem 0;
+  padding: 3rem 1.5rem 2rem;
   background-color: #fff;
+}
+
+.header .intro-copy {
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .header .input-text {
@@ -23,7 +28,7 @@ body {
 }
 
 .photo-form {
-  margin: 2rem auto;
+  margin: 2rem auto 0;
   max-width: 500px
 }
 

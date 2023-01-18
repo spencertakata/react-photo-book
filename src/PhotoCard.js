@@ -6,8 +6,10 @@ const PhotoCard = (props) => {
     <div className="photo-card">
       <img src={props.src} className="img" alt="" />
       <div className="card-bottom">
-        <p>{props.description}</p>
-        <button onClick={() => props.deletePhoto(props.id)} className="del-btn">Delete</button>
+        <div className="flex-container">
+          <p>{props.description}</p>
+          <button onClick={() => props.deletePhoto(props.id)} className="del-btn">Delete</button>
+        </div>
       </div>
     </div>
   )
